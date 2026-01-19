@@ -4,14 +4,14 @@ import { Search } from "lucide-react";
 
 // Mock Data
 const PRODUCTS = [
-    { id: 1, name: "Chocolate Chip Cookies", category: "Cookies", image: "/images/chocolate_chip_cookies_pack.jpg", desc: "Classic gooey chocolate chip cookies." },
-    { id: 2, name: "Almond Caramel Cake", category: "Cakes", image: "/images/almond_caramel_cake.jpg", desc: "Nutty and sweet caramel delight." },
-    { id: 3, name: "Choco Lava Mini", category: "Brownies", image: "/images/egglesschocolavacake.jpg", desc: "Molten chocolate center." },
-    { id: 4, name: "Rainbow Cupcakes", category: "Cupcakes", image: "/images/cupcake_the_bakery.jpg", desc: "Colorful frosting on vanilla base." },
-    { id: 5, name: "Double Chocolate Brownie", category: "Brownies", image: "/images/egglessmochabrownie.jpg", desc: "Rich chocolate fudge brownie." },
-    { id: 6, name: "Nutella Bombs", category: "Doughnuts", image: "/images/nutellabombs.jpg", desc: "Soft doughnuts filled with Nutella." },
-    { id: 7, name: "Knot Cookies", category: "Cookies", image: "/images/chocolate_knot_cookies.jpg", desc: "Buttery twisted cookies." },
-    { id: 8, name: "Mango Mousse", category: "Desserts", image: "/images/mangomousse.jpg", desc: "Fresh seasonal mango mousse." },
+    { id: 1, name: "Chocolate Chip Cookies", category: "Cookies", image: "/images/chocolate_chip_cookies_pack.webp", desc: "Classic gooey chocolate chip cookies." },
+    { id: 2, name: "Almond Caramel Cake", category: "Cakes", image: "/images/almond_caramel_cake.webp", desc: "Nutty and sweet caramel delight." },
+    { id: 3, name: "Choco Lava Mini", category: "Brownies", image: "/images/egglesschocolavacake.webp", desc: "Molten chocolate center." },
+    { id: 4, name: "Rainbow Cupcakes", category: "Cupcakes", image: "/images/cupcake_the_bakery.webp", desc: "Colorful frosting on vanilla base." },
+    { id: 5, name: "Double Chocolate Brownie", category: "Brownies", image: "/images/egglessmochabrownie.webp", desc: "Rich chocolate fudge brownie." },
+    { id: 6, name: "Nutella Bombs", category: "Doughnuts", image: "/images/nutellabombs.webp", desc: "Soft doughnuts filled with Nutella." },
+    { id: 7, name: "Knot Cookies", category: "Cookies", image: "/images/chocolate_knot_cookies.webp", desc: "Buttery twisted cookies." },
+    { id: 8, name: "Mango Mousse", category: "Desserts", image: "/images/mangomousse.webp", desc: "Fresh seasonal mango mousse." },
 ];
 
 const CATEGORIES = ["All", "Cookies", "Cakes", "Brownies", "Cupcakes", "Doughnuts"];

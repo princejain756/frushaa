@@ -37,7 +37,7 @@ const About = () => {
                     >
                         <div className="relative z-10 rounded-2xl overflow-hidden shadow-2xl">
                             {/* Placeholder for Kavisha's photo */}
-                            <img src="/images/frusha_sticker_sheet.jpg" alt="Kavisha - The Founder" className="w-full h-auto object-cover" />
+                            <img src="/images/frusha_sticker_sheet.webp" alt="Kavisha - The Founder" className="w-full h-auto object-cover" />
                         </div>
                         <div className="absolute -bottom-6 -left-6 w-full h-full border-2 border-primary rounded-2xl -z-10"></div>
                     </motion.div>
