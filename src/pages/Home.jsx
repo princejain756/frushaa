@@ -24,7 +24,7 @@ const Home = () => {
                 {/* Background Image with Overlay */}
                 <div className="absolute inset-0 z-0">
                     <img
-                        src="/images/white_cake_with_sprinkles.webp"
+                        src="/images/bg.jpg"
                         alt="Delicious Cake"
                         className="w-full h-full object-cover"
                     />
