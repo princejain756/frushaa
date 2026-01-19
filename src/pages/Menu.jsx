@@ -1,4 +1,5 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import { useSearchParams } from "react-router-dom";
 import { motion, AnimatePresence } from "framer-motion";
 import { Search } from "lucide-react";
 
@@ -17,8 +18,29 @@ const PRODUCTS = [
 const CATEGORIES = ["All", "Cookies", "Cakes", "Brownies", "Cupcakes", "Doughnuts"];
 
 const Menu = () => {
-    const [activeCategory, setActiveCategory] = useState("All");
+    const [searchParams, setSearchParams] = useSearchParams();
+    const categoryFromURL = searchParams.get("category");
+
+    const [activeCategory, setActiveCategory] = useState(categoryFromURL || "All");
     const [searchTerm, setSearchTerm] = useState("");
+
+    // Sync state if URL search params change
+    useEffect(() => {
+        if (categoryFromURL) {
+            setActiveCategory(categoryFromURL);
+        } else {
+            setActiveCategory("All");
+        }
+    }, [categoryFromURL]);
+
+    const handleCategoryClick = (cat) => {
+        setActiveCategory(cat);
+        if (cat === "All") {
+            setSearchParams({});
+        } else {
+            setSearchParams({ category: cat });
+        }
+    };
 
     const filteredProducts = PRODUCTS.filter((product) => {
         const matchesCategory = activeCategory === "All" || product.category === activeCategory;
@@ -43,7 +65,7 @@ const Menu = () => {
                         {CATEGORIES.map((cat) => (
                             <button
                                 key={cat}
-                                onClick={() => setActiveCategory(cat)}
+                                onClick={() => handleCategoryClick(cat)}
                                 className={`px-4 py-2 rounded-full text-sm font-medium transition-all duration-300 ${activeCategory === cat
                                     ? "bg-primary text-text shadow-md transform scale-105"
                                     : "bg-white text-text/70 hover:bg-white/80"

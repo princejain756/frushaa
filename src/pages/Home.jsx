@@ -130,7 +130,7 @@ const Home = () => {
                         {/* Category 3 */}
                         <motion.div variants={fadeInUp} className="group relative overflow-hidden rounded-2xl aspect-[4/5] cursor-pointer">
                             <img
-                                src="/images/choco_lava_mini_cakes.webp"
+                                src="/images/egglessmochabrownie.webp"
                                 alt="Brownies & More"
                                 className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
                             />
