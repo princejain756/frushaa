@@ -105,7 +105,7 @@ const Contact = () => {
                         <form className="space-y-6" onSubmit={(e) => e.preventDefault()}>
                             <div>
                                 <label className="block text-sm font-medium text-text/70 mb-1">Your Name</label>
-                                <input type="text" className="w-full px-4 py-3 rounded-lg border border-gray-200 focus:ring-2 focus:ring-primary/50 focus:border-transparent outline-none transition-all" placeholder="John Doe" />
+                                <input type="text" className="w-full px-4 py-3 rounded-lg border border-gray-200 focus:ring-2 focus:ring-primary/50 focus:border-transparent outline-none transition-all" placeholder="Kavisha Bhandari" />
                             </div>
                             <div>
                                 <label className="block text-sm font-medium text-text/70 mb-1">Phone Number</label>
