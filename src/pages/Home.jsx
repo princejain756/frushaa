@@ -178,7 +178,7 @@ const Home = () => {
                             className="flex-1 relative"
                         >
                             <div className="relative z-10 rounded-2xl overflow-hidden shadow-2xl rotate-2 hover:rotate-0 transition-transform duration-500">
-                                <img src="/images/frusha_bakery_labels.webp" alt="Kavisha's Work" className="w-full" />
+                                <img src="/Products/pictureofkavisha.jpeg" alt="Kavisha - The Founder" className="w-full" />
                             </div>
                             {/* Decorative background blob */}
                             <div className="absolute -top-10 -right-10 w-64 h-64 bg-primary/20 rounded-full blur-3xl -z-10"></div>

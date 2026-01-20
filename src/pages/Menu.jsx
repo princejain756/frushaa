@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import { useSearchParams } from "react-router-dom";
 import { motion, AnimatePresence } from "framer-motion";
-import { Search } from "lucide-react";
+import { Search, X } from "lucide-react";
 
 // Mock Data
 const PRODUCTS = [
@@ -9,10 +9,21 @@ const PRODUCTS = [
     { id: 2, name: "Almond Caramel Cake", category: "Cakes", image: "/images/almond_caramel_cake.webp", desc: "Nutty and sweet caramel delight." },
     { id: 3, name: "Choco Lava Mini", category: "Brownies", image: "/images/egglesschocolavacake.webp", desc: "Molten chocolate center." },
     { id: 4, name: "Rainbow Cupcakes", category: "Cupcakes", image: "/images/cupcake_the_bakery.webp", desc: "Colorful frosting on vanilla base." },
-    { id: 5, name: "Double Chocolate Brownie", category: "Brownies", image: "/images/egglessmochabrownie.webp", desc: "Rich chocolate fudge brownie." },
+    { id: 5, name: "Mocha Brownie", category: "Brownies", image: "/images/egglessmochabrownie.webp", desc: "Rich chocolate mocha brownie." },
     { id: 6, name: "Nutella Bombs", category: "Doughnuts", image: "/images/nutellabombs.webp", desc: "Soft doughnuts filled with Nutella." },
-    { id: 7, name: "Knot Cookies", category: "Cookies", image: "/images/chocolate_knot_cookies.webp", desc: "Buttery twisted cookies." },
+    { id: 7, name: "Marble Cookie", category: "Cookies", image: "/images/chocolate_knot_cookies.webp", desc: "Buttery twisted cookies." },
     { id: 8, name: "Mango Mousse", category: "Desserts", image: "/images/mangomousse.webp", desc: "Fresh seasonal mango mousse." },
+    { id: 9, name: "Chocolate Cake", category: "Cakes", image: "/Products/chocolatecake.jpeg", desc: "Rich and moist chocolate cake." },
+    { id: 10, name: "Chocolate Doughnut", category: "Doughnuts", image: "/Products/chocolatedoughtnut.jpeg", desc: "Indulgent chocolate glazed doughnut." },
+    { id: 11, name: "Christmas Choco Chunk Cookies", category: "Cookies", image: "/Products/christmaschocochunkcookies.jpeg", desc: "Festive cookies loaded with chocolate chunks." },
+    { id: 12, name: "Customised Makeup Cake", category: "Cakes", image: "/Products/customisedmakeupcake.jpeg", desc: "Creative makeup themed celebration cake." },
+    { id: 13, name: "Customised Vanilla Cake", category: "Cakes", image: "/Products/customisedvanillacake.jpeg", desc: "Custom designed vanilla cake for your occasion." },
+    { id: 14, name: "Doughnut Bouquet", category: "Doughnuts", image: "/Products/doughnutbouqet.jpeg", desc: "Beautiful bouquet of assorted doughnuts." },
+    { id: 15, name: "Heart Shape Choco Chip Cookies", category: "Cookies", image: "/Products/heartshapechocochipcookies.jpeg", desc: "Heart-shaped cookies with chocolate chips." },
+    { id: 16, name: "Marble Cake", category: "Cakes", image: "/Products/marblecake.jpeg", desc: "Classic marble swirl cake." },
+    { id: 17, name: "Vanilla Cake", category: "Cakes", image: "/Products/Vanillacake.jpeg", desc: "Light and fluffy vanilla cake." },
+    { id: 18, name: "All Flavours Customised Two Tier Cake", category: "Cakes", image: "/Products/inallflavours customised two tier cake.jpeg", desc: "Stunning two tier cake available in all flavours." },
+    { id: 19, name: "Strawberry Cake", category: "Cakes", image: "/Products/Strawberrycake.jpeg", desc: "Fresh and fruity strawberry cake." },
 ];
 
 const CATEGORIES = ["All", "Cookies", "Cakes", "Brownies", "Cupcakes", "Doughnuts"];
@@ -23,6 +34,7 @@ const Menu = () => {
 
     const [activeCategory, setActiveCategory] = useState(categoryFromURL || "All");
     const [searchTerm, setSearchTerm] = useState("");
+    const [selectedProduct, setSelectedProduct] = useState(null);
 
     // Sync state if URL search params change
     useEffect(() => {
@@ -33,6 +45,18 @@ const Menu = () => {
         }
     }, [categoryFromURL]);
 
+    // Prevent body scroll when modal is open
+    useEffect(() => {
+        if (selectedProduct) {
+            document.body.style.overflow = 'hidden';
+        } else {
+            document.body.style.overflow = 'unset';
+        }
+        return () => {
+            document.body.style.overflow = 'unset';
+        };
+    }, [selectedProduct]);
+
     const handleCategoryClick = (cat) => {
         setActiveCategory(cat);
         if (cat === "All") {
@@ -40,6 +64,14 @@ const Menu = () => {
         } else {
             setSearchParams({ category: cat });
         }
+    };
+
+    const openProductModal = (product) => {
+        setSelectedProduct(product);
+    };
+
+    const closeProductModal = () => {
+        setSelectedProduct(null);
     };
 
     const filteredProducts = PRODUCTS.filter((product) => {
@@ -102,7 +134,8 @@ const Menu = () => {
                                 animate={{ opacity: 1, scale: 1 }}
                                 exit={{ opacity: 0, scale: 0.9 }}
                                 key={product.id}
-                                className="bg-white rounded-2xl overflow-hidden shadow-sm hover:shadow-xl transition-shadow duration-300 group"
+                                onClick={() => openProductModal(product)}
+                                className="bg-white rounded-2xl overflow-hidden shadow-sm hover:shadow-xl transition-shadow duration-300 group cursor-pointer"
                             >
                                 <div className="relative h-64 overflow-hidden bg-gray-100">
                                     <img
@@ -110,16 +143,11 @@ const Menu = () => {
                                         alt={product.name}
                                         className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
                                     />
-                                    {/* Quick Add Overlay */}
-                                    <div className="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
-                                        <a
-                                            href={`https://wa.me/919553339663?text=Hi, I would like to order ${product.name}`}
-                                            target="_blank"
-                                            rel="noopener noreferrer"
-                                            className="px-6 py-2 bg-white text-text font-semibold rounded-full transform translate-y-4 group-hover:translate-y-0 transition-transform duration-300 hover:bg-primary"
-                                        >
-                                            Order Now
-                                        </a>
+                                    {/* Hover Overlay */}
+                                    <div className="absolute inset-0 bg-black/30 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
+                                        <span className="px-6 py-2 bg-white/90 text-text font-semibold rounded-full transform translate-y-4 group-hover:translate-y-0 transition-transform duration-300">
+                                            View Details
+                                        </span>
                                     </div>
                                 </div>
 
@@ -143,6 +171,71 @@ const Menu = () => {
                     </div>
                 )}
             </div>
+
+            {/* Product Modal */}
+            <AnimatePresence>
+                {selectedProduct && (
+                    <motion.div
+                        initial={{ opacity: 0 }}
+                        animate={{ opacity: 1 }}
+                        exit={{ opacity: 0 }}
+                        className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/60 backdrop-blur-sm"
+                        onClick={closeProductModal}
+                    >
+                        <motion.div
+                            initial={{ scale: 0.8, opacity: 0 }}
+                            animate={{ scale: 1, opacity: 1 }}
+                            exit={{ scale: 0.8, opacity: 0 }}
+                            transition={{ type: "spring", damping: 25, stiffness: 300 }}
+                            className="relative bg-white rounded-3xl overflow-hidden shadow-2xl max-w-lg w-full max-h-[90vh] overflow-y-auto"
+                            onClick={(e) => e.stopPropagation()}
+                        >
+                            {/* Close Button */}
+                            <button
+                                onClick={closeProductModal}
+                                className="absolute top-4 right-4 z-10 p-2 bg-white/90 hover:bg-white rounded-full shadow-lg transition-all duration-200 hover:scale-110"
+                            >
+                                <X size={20} className="text-text" />
+                            </button>
+
+                            {/* Full Image */}
+                            <div className="w-full aspect-square bg-gray-100">
+                                <img
+                                    src={selectedProduct.image}
+                                    alt={selectedProduct.name}
+                                    className="w-full h-full object-cover"
+                                />
+                            </div>
+
+                            {/* Product Details */}
+                            <div className="p-6 space-y-4">
+                                <div>
+                                    <span className="text-xs font-medium uppercase tracking-wider text-primary">
+                                        {selectedProduct.category}
+                                    </span>
+                                    <h2 className="text-2xl font-bold text-text mt-1">
+                                        {selectedProduct.name}
+                                    </h2>
+                                </div>
+
+                                <p className="text-text/70 leading-relaxed">
+                                    {selectedProduct.desc}
+                                </p>
+
+                                {/* Order Now Button */}
+                                <a
+                                    href={`https://wa.me/919553339663?text=Hi, I would like to order ${selectedProduct.name}`}
+                                    target="_blank"
+                                    rel="noopener noreferrer"
+                                    className="block w-full py-4 bg-primary hover:bg-primary/90 text-text font-bold text-center rounded-full transition-all duration-300 transform hover:scale-[1.02] shadow-lg hover:shadow-xl"
+                                >
+                                    Order Now on WhatsApp
+                                </a>
+                            </div>
+                        </motion.div>
+                    </motion.div>
+                )}
+            </AnimatePresence>
         </div>
     );
 };
