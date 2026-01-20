@@ -1,7 +1,37 @@
+import { useState } from "react";
 import { motion } from "framer-motion";
-import { MessageCircle, Instagram, MapPin, Send } from "lucide-react";
+import { MessageCircle, Instagram, MapPin, Send, ChevronRight } from "lucide-react";
 
 const Contact = () => {
+    const [formData, setFormData] = useState({
+        name: "",
+        phone: "",
+        message: ""
+    });
+
+    const handleChange = (e) => {
+        const { name, value } = e.target;
+        setFormData(prev => ({ ...prev, [name]: value }));
+    };
+
+    const handleWhatsApp = (e) => {
+        e.preventDefault();
+
+        // WhatsApp number
+        const phoneNumber = "919553339663";
+
+        // Construct the message
+        let text = `Hi Frusha! I have an inquiry:\n\n`;
+        text += `*Name:* ${formData.name || "Not provided"}\n`;
+        if (formData.phone) text += `*Phone:* ${formData.phone}\n`;
+        text += `*Inquiry:* ${formData.message || "Hi, I'd like to check your menu!"}`;
+
+        const encodedText = encodeURIComponent(text);
+        const whatsappUrl = `https://wa.me/${phoneNumber}?text=${encodedText}`;
+
+        window.open(whatsappUrl, "_blank");
+    };
+
     return (
         <div className="pt-24 pb-20 min-h-screen bg-white">
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -45,11 +75,11 @@ const Contact = () => {
                                     <div className="w-12 h-12 bg-green-100 text-green-600 rounded-full flex items-center justify-center mr-4 group-hover:bg-green-600 group-hover:text-white transition-colors">
                                         <MessageCircle size={24} />
                                     </div>
-                                    <div>
+                                    <div className="flex-grow">
                                         <h3 className="font-semibold text-text">WhatsApp Us</h3>
                                         <p className="text-text/60 text-sm">Place orders, ask for customization</p>
                                     </div>
-                                    <ArrowRightIcon className="ml-auto text-gray-300 group-hover:text-green-600 transition-colors" />
+                                    <ChevronRight className="text-gray-300 group-hover:text-green-600 transition-colors" size={20} />
                                 </a>
 
                                 <a
@@ -61,11 +91,11 @@ const Contact = () => {
                                     <div className="w-12 h-12 bg-pink-100 text-pink-600 rounded-full flex items-center justify-center mr-4 group-hover:bg-pink-600 group-hover:text-white transition-colors">
                                         <Instagram size={24} />
                                     </div>
-                                    <div>
+                                    <div className="flex-grow">
                                         <h3 className="font-semibold text-text">DM on Instagram</h3>
                                         <p className="text-text/60 text-sm">Follow us & check our latest creations</p>
                                     </div>
-                                    <ArrowRightIcon className="ml-auto text-gray-300 group-hover:text-pink-600 transition-colors" />
+                                    <ChevronRight className="text-gray-300 group-hover:text-pink-600 transition-colors" size={20} />
                                 </a>
                             </div>
                         </div>
@@ -102,20 +132,48 @@ const Contact = () => {
                         className="bg-white border border-gray-100 p-8 rounded-2xl shadow-lg"
                     >
                         <h2 className="text-2xl font-serif text-text font-bold mb-6">Send an Inquiry</h2>
-                        <form className="space-y-6" onSubmit={(e) => e.preventDefault()}>
+                        <form className="space-y-6" onSubmit={handleWhatsApp}>
                             <div>
                                 <label className="block text-sm font-medium text-text/70 mb-1">Your Name</label>
-                                <input type="text" className="w-full px-4 py-3 rounded-lg border border-gray-200 focus:ring-2 focus:ring-primary/50 focus:border-transparent outline-none transition-all" placeholder="Kavisha Bhandari" />
+                                <input
+                                    type="text"
+                                    name="name"
+                                    value={formData.name}
+                                    onChange={handleChange}
+                                    className="w-full px-4 py-3 rounded-lg border border-gray-200 focus:ring-2 focus:ring-primary/50 focus:border-transparent outline-none transition-all"
+                                    placeholder="Kavisha Bhandari"
+                                    required
+                                />
                             </div>
                             <div>
-                                <label className="block text-sm font-medium text-text/70 mb-1">Phone Number</label>
-                                <input type="tel" className="w-full px-4 py-3 rounded-lg border border-gray-200 focus:ring-2 focus:ring-primary/50 focus:border-transparent outline-none transition-all" placeholder="+91 98765 43210" />
+                                <label className="block text-sm font-medium text-text/70 mb-1">
+                                    Phone Number <span className="text-xs text-text/40 font-normal ml-1">(Optional)</span>
+                                </label>
+                                <input
+                                    type="tel"
+                                    name="phone"
+                                    value={formData.phone}
+                                    onChange={handleChange}
+                                    className="w-full px-4 py-3 rounded-lg border border-gray-200 focus:ring-2 focus:ring-primary/50 focus:border-transparent outline-none transition-all"
+                                    placeholder="+91 98765 43210"
+                                />
                             </div>
                             <div>
                                 <label className="block text-sm font-medium text-text/70 mb-1">Message / Order Details</label>
-                                <textarea rows="4" className="w-full px-4 py-3 rounded-lg border border-gray-200 focus:ring-2 focus:ring-primary/50 focus:border-transparent outline-none transition-all" placeholder="I'd like to order 1kg Chocolate Cake..."></textarea>
+                                <textarea
+                                    rows="4"
+                                    name="message"
+                                    value={formData.message}
+                                    onChange={handleChange}
+                                    className="w-full px-4 py-3 rounded-lg border border-gray-200 focus:ring-2 focus:ring-primary/50 focus:border-transparent outline-none transition-all"
+                                    placeholder="I'd like to order 1kg Chocolate Cake..."
+                                    required
+                                ></textarea>
                             </div>
-                            <button className="w-full py-4 bg-primary text-text font-bold rounded-lg hover:bg-white hover:text-primary border-2 border-transparent hover:border-primary transition-all duration-300 flex items-center justify-center gap-2">
+                            <button
+                                type="submit"
+                                className="w-full py-4 bg-primary text-text font-bold rounded-lg hover:bg-white hover:text-primary border-2 border-transparent hover:border-primary transition-all duration-300 flex items-center justify-center gap-2"
+                            >
                                 Send to WhatsApp <Send size={18} />
                             </button>
                         </form>
@@ -125,11 +183,5 @@ const Contact = () => {
         </div>
     );
 };
-
-const ArrowRightIcon = ({ className }) => (
-    <svg xmlns="http://www.w3.org/2000/svg" className={`h-5 w-5 ${className}`} fill="none" viewBox="0 0 24 24" stroke="currentColor">
-        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
-    </svg>
-);
 
 export default Contact;
