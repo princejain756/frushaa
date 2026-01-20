@@ -99,7 +99,7 @@ const Chatbot = () => {
                                 </a>
 
                                 <a
-                                    href="https://instagram.com/frusha"
+                                    href="https://www.instagram.com/frushaa_/"
                                     target="_blank"
                                     rel="noopener noreferrer"
                                     className="flex flex-col items-center gap-2 p-2 rounded-lg hover:bg-pink-50 transition-colors group"

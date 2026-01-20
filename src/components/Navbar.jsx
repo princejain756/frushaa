@@ -34,7 +34,7 @@ const Navbar = () => {
 
     const contactOptions = [
         { name: "WhatsApp", icon: MessageCircle, href: "https://wa.me/919553339663", color: "text-green-500" },
-        { name: "Instagram", icon: Instagram, href: "https://instagram.com/frusha", color: "text-pink-500" },
+        { name: "Instagram", icon: Instagram, href: "https://www.instagram.com/frushaa_/", color: "text-pink-500" },
         { name: "Call Us", icon: Phone, href: "tel:+919553339663", color: "text-blue-500" },
     ];
 
@@ -51,8 +51,8 @@ const Navbar = () => {
     return (
         <nav
             className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${scrolled || isOpen
-                    ? "bg-white/95 backdrop-blur-xl shadow-lg border-b border-primary/10"
-                    : "bg-white/80 backdrop-blur-md"
+                ? "bg-white/95 backdrop-blur-xl shadow-lg border-b border-primary/10"
+                : "bg-white/80 backdrop-blur-md"
                 }`}
         >
             {/* Decorative top border */}
@@ -87,8 +87,8 @@ const Navbar = () => {
                                 <Link
                                     to={link.path}
                                     className={`flex items-center gap-1 px-4 py-2 rounded-full text-sm font-semibold transition-all duration-300 ${location.pathname === link.path
-                                            ? "bg-primary/20 text-primary"
-                                            : "text-text hover:bg-primary/10 hover:text-primary"
+                                        ? "bg-primary/20 text-primary"
+                                        : "text-text hover:bg-primary/10 hover:text-primary"
                                         }`}
                                 >
                                     {link.name}
@@ -207,8 +207,8 @@ const Navbar = () => {
                                     to={link.path}
                                     onClick={() => setIsOpen(false)}
                                     className={`block px-4 py-3 rounded-xl text-lg font-semibold transition-colors ${location.pathname === link.path
-                                            ? "bg-primary/20 text-primary"
-                                            : "text-text hover:bg-primary/10"
+                                        ? "bg-primary/20 text-primary"
+                                        : "text-text hover:bg-primary/10"
                                         }`}
                                 >
                                     {link.name}

@@ -53,7 +53,7 @@ const Contact = () => {
                                 </a>
 
                                 <a
-                                    href="https://instagram.com/frusha"
+                                    href="https://www.instagram.com/frushaa_/"
                                     target="_blank"
                                     rel="noopener noreferrer"
                                     className="flex items-center p-4 bg-white rounded-xl shadow-sm hover:shadow-md transition-all group"
